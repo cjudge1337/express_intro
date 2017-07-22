@@ -1,15 +1,29 @@
-const path = require('path');
+const bodyParser = require('body-parser');
 const express = require('express');
-const app = express()
+const app = express();
 
-app.set('views', path.join(process.argv[3]));
-app.set('view engine', 'jade')
+app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/home', (req, res) => {
-  res.render('index', {date: new Date().toDateString()})
+app.post('/form', (req, res) => {
+  var string = req.body.str.split('').reverse().join('');
+  res.end(string);
 });
 
 app.listen(process.argv[2]);
+
+// const path = require('path');
+// const express = require('express');
+// const app = express();
+//
+// app.set('views', path.join(process.argv[3]));
+// app.set('view engine', 'jade')
+//
+// app.get('/home', (req, res) => {
+//   res.render('index', {date: new Date().toDateString()})
+// });
+//
+// app.listen(process.argv[2]);
+
 // const express = require('express');
 // const app = express();
 //
