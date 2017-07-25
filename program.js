@@ -1,11 +1,28 @@
+const fs = require('fs');
 const express = require('express');
 const app = express();
 
-app.get('/search', (req, res) => {
-  res.send(req.query);
+app.get('/books', (req, res) => {
+  var object;
+
+  fs.readFile(process.argv[3], 'utf-8', (err, data) => {
+    if (err) throw err;
+    object = JSON.parse(data);
+
+    res.send(object);
+  });
 });
 
 app.listen(process.argv[2]);
+
+// const express = require('express');
+// const app = express();
+//
+// app.get('/search', (req, res) => {
+//   res.send(req.query);
+// });
+//
+// app.listen(process.argv[2]);
 
 // const express = require('express')
 // const app = express()
